@@ -1,19 +1,54 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+<!--Dans un nouveau .html.twig, que je nomme base.html.twig, j'intègre mon header et mon footer
+Cela va me permettre de conserver le même header et le même footer dans chacune de mes pages,
+et donc d'éviter de les copier à chaque fois sur une page.
+Cette page est vulgairement mon gabarit.-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--Dans le title de ma page base, j'appelle la fonction block metatitle qui va me permettre
+    d'afficher mon metatitle sur toutes les pages de mon site-->
+    <title>{% block metatitle %}La bibliothèque pour tous{% endblock metatitle%}</title>
+    <!--J'utilise la balise link et la fonction asset pour rattacher ma feuille de style à mon html-->
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bookdetails.css') }}">
+</head>
+<body>
+<header class="header">
+    <h1>LA BIBLIOTHÈQUE POUR TOUS</h1>
+    <nav class="nav-bar">
+        <ul class="menu">
+            <li class="main-menu-element">
+                <a href="{{ path('home') }}">Accueil</a>
+            </li>
+            <li class="main-menu-element">
+                <a href="{{ path('books') }}">La bibliothèque</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main>
+
+    {% block main %}{% endblock main %}
+
+    <!--J'appelle la fonction Extends pour indiquer que j'intègre le contenu de-->
+    <!--cette page dans mon fichier de base "base.html.twig"-->
+    <!--Grâce à la fonction "block", j'intègre le contenu de mon "Main".-->
+
+</main>
+<footer class="footer">
+    <div class="footer-group">
+        <div class="footer-elements">
+            <ul>
+                <li><span>A propos</span></li>
+                <li>Equipe</li>
+                <li>Avis clients</li>
+                <li>Conditions générales</li>
+                <li>Mentions légales</li>
+            </ul>
+        </div>
+    </div>
+</footer>
+</body>
 </html>
